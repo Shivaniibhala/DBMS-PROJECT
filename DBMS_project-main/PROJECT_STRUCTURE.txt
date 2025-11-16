@@ -1,0 +1,141 @@
+SCHOLARSHIP FINDER - PROJECT STRUCTURE
+==========================================
+
+📁 dbms final project/
+│
+├── 📄 README.md                    # Main project documentation
+├── 📄 QUICKSTART.md                # Quick start guide  
+├── 📄 PROJECT_SUMMARY.md           # Complete project overview
+├── 📄 PROJECT_STRUCTURE.txt        # This file
+├── 📄 .gitignore                   # Git ignore rules
+│
+├── 📁 backend/                     # Node.js Backend Server
+│   ├── 📄 package.json             # Backend dependencies
+│   ├── 📄 server.js                # Main server entry point
+│   ├── 📄 .env.example             # Environment variables template
+│   ├── 📄 .gitignore               # Backend git ignore
+│   ├── 📄 README.md                # Backend documentation
+│   │
+│   ├── 📁 config/
+│   │   ├── 📄 database.js           # MySQL connection pool
+│   │   └── 📄 schema.sql            # Database schema (IMPORTANT!)
+│   │
+│   ├── 📁 controllers/
+│   │   ├── 📄 authController.js     # Authentication logic
+│   │   ├── 📄 scholarshipController.js  # Scholarships logic
+│   │   └── 📄 wishlistController.js     # Wishlist logic
+│   │
+│   ├── 📁 middleware/
+│   │   └── 📄 auth.js               # JWT authentication middleware
+│   │
+│   ├── 📁 models/
+│   │   ├── 📄 User.js               # User database model
+│   │   ├── 📄 Scholarship.js        # Scholarship database model
+│   │   └── 📄 Wishlist.js           # Wishlist database model
+│   │
+│   ├── 📁 routes/
+│   │   ├── 📄 authRoutes.js         # /api/auth/* routes
+│   │   ├── 📄 scholarshipRoutes.js  # /api/scholarships/* routes
+│   │   └── 📄 wishlistRoutes.js     # /api/wishlist/* routes
+│   │
+│   ├── 📁 services/
+│   │   └── 📄 emailService.js       # Email alert service (Nodemailer)
+│   │
+│   └── 📁 utils/
+│       ├── 📄 loadData.js           # Load sample data into DB
+│       └── 📄 loadCSV.js            # Load data from CSV file
+│
+└── 📁 frontend/                    # React.js Frontend App
+    ├── 📄 package.json             # Frontend dependencies
+    ├── 📄 README.md                # Frontend documentation
+    ├── 📄 .gitignore               # Frontend git ignore
+    │
+    ├── 📁 public/
+    │   └── 📄 index.html            # HTML template
+    │
+    └── 📁 src/
+        ├── 📄 index.js              # React entry point
+        ├── 📄 index.css             # Global styles
+        ├── 📄 App.js                # Main App component
+        ├── 📄 App.css               # App styles
+        │
+        ├── 📁 pages/
+        │   ├── 📄 Home.js           # Home page (scholarship listing)
+        │   ├── 📄 Login.js          # Login page
+        │   ├── 📄 Signup.js         # Signup page
+        │   └── 📄 Wishlist.js       # Wishlist page
+        │
+        ├── 📁 components/
+        │   ├── 📄 Navbar.js         # Navigation bar
+        │   ├── 📄 Filters.js        # Scholarship filters
+        │   └── 📄 ScholarshipList.js # Scholarship display
+        │
+        └── 📁 context/
+            └── 📄 AuthContext.js    # Authentication context
+
+==========================================
+KEY FILES TO EDIT:
+==========================================
+
+1. backend/.env (create from .env.example)
+   - Set database credentials
+   - Set JWT secret
+   - Configure email settings
+
+2. backend/config/schema.sql
+   - Run this to create database structure
+
+3. To load sample data:
+   - backend/utils/loadData.js
+   - backend/utils/loadCSV.js
+
+==========================================
+INSTALLATION STEPS:
+==========================================
+
+1. Setup Database:
+   mysql -u root -p < backend/config/schema.sql
+
+2. Install Backend:
+   cd backend
+   npm install
+   # Create and configure .env
+   npm start
+
+3. Install Frontend:
+   cd frontend
+   npm install
+   npm start
+
+4. Access App:
+   http://localhost:3000 (Frontend)
+   http://localhost:5000 (Backend API)
+
+==========================================
+API ENDPOINTS:
+==========================================
+
+Authentication:
+  POST   /api/auth/signup
+  POST   /api/auth/login
+
+Scholarships:
+  GET    /api/scholarships          # List all (with filters)
+  GET    /api/scholarships/:id       # Get one
+
+Wishlist (Protected):
+  POST   /api/wishlist               # Add to wishlist
+  GET    /api/wishlist               # Get user wishlist
+  DELETE /api/wishlist/:id           # Remove from wishlist
+
+==========================================
+DATABASE TABLES:
+==========================================
+
+1. users           - User accounts
+2. scholarships    - Scholarship data
+3. wishlist        - User favorites
+4. email_alerts    - Alert tracking
+
+==========================================
+
